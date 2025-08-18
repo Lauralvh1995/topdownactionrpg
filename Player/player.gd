@@ -69,7 +69,10 @@ func just_dashed() -> void:
 func can_dash() -> bool:
 	var can_player_dash : bool = power_up_controller.has_powerup("Dash")
 	if can_player_dash:
-		return can_dash_in_air()
+		if not is_on_floor():
+			return can_dash_in_air()
+		else:
+			return can_player_dash
 	else:
 		return false
 
