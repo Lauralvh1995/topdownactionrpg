@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvs4ummcfjc3e"]
+
+[ext_resource type="Script" path="res://camera_controller.gd" id="1_m2wkh"]
+[ext_resource type="Texture2D" uid="uid://cdn0138g711d" path="res://Player/kloofendal_48d_partly_cloudy_puresky_1k.hdr" id="2_hua07"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rjliu"]
+radius = 0.3
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_8kok5"]
+panorama = ExtResource("2_hua07")
+
+[sub_resource type="Sky" id="Sky_sr8yq"]
+sky_material = SubResource("PanoramaSkyMaterial_8kok5")
+
+[sub_resource type="Environment" id="Environment_380py"]
+background_mode = 2
+sky = SubResource("Sky_sr8yq")
+ambient_light_source = 3
+reflected_light_source = 2
+ssao_enabled = true
+fog_enabled = true
+fog_density = 0.005
+fog_aerial_perspective = 0.01
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_3syud"]
+auto_exposure_enabled = true
+dof_blur_far_enabled = true
+dof_blur_far_distance = 40.0
+dof_blur_near_enabled = true
+dof_blur_near_distance = 3.0
+
+[node name="CameraController" type="Node3D"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+script = ExtResource("1_m2wkh")
+height_offset = 1.0
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.816138, 0.577858, 0, -0.577858, 0.816138, 0, 0, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Pivot"]
+shape = SubResource("SphereShape3D_rjliu")
+spring_length = 30.0
+
+[node name="Camera3D" type="Camera3D" parent="Pivot/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+environment = SubResource("Environment_380py")
+attributes = SubResource("CameraAttributesPractical_3syud")
+current = true
+fov = 30.0
+size = 10.0
+near = 0.005

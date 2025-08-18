@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://xhktbypbce23"]
+
+[ext_resource type="PackedScene" uid="uid://caii6kubshjjo" path="res://Player/player.tscn" id="1_vej28"]
+[ext_resource type="PackedScene" uid="uid://dvs4ummcfjc3e" path="res://CameraRig.tscn" id="2_4u05h"]
+[ext_resource type="Material" uid="uid://cx14t5xn30km8" path="res://GreyBoxMaterials/FloorMaterial.tres" id="2_tttc6"]
+[ext_resource type="Material" uid="uid://bdcxqgddju4nx" path="res://GreyBoxMaterials/ObjectMaterial.tres" id="4_umfkq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ibqwo"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wtm3q"]
+material = ExtResource("2_tttc6")
+size = Vector3(20, 1, 20)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_vej28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_mask = 5
+camera = NodePath("../CameraController/Pivot/SpringArm3D/Camera3D")
+
+[node name="CameraController" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("2_4u05h")]
+follow_target = NodePath("../Player/CameraTargetController/CameraTarget")
+drag = 5.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ibqwo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_wtm3q")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8152, -3.5, 14)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+shape = SubResource("BoxShape3D_ibqwo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
+mesh = SubResource("BoxMesh_wtm3q")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 6)
+use_collision = true
+collision_layer = 4
+material = ExtResource("4_umfkq")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.5, 2)
+use_collision = true
+collision_layer = 4
+size = Vector3(1, 1, 3)
+material = ExtResource("4_umfkq")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -2)
+use_collision = true
+collision_layer = 4
+size = Vector3(1, 2, 3)
+material = ExtResource("4_umfkq")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -3)
+use_collision = true
+collision_layer = 4
+size = Vector3(4, 2, 3)
+material = ExtResource("4_umfkq")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 6, -1.95, 12.3476)
+use_collision = true
+size = Vector3(3, 1, 6)
+material = ExtResource("2_tttc6")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.5, 0.866025, 0, 0.866025, -0.5, -1, -2.18557e-08, -3.78552e-08, 12.334, -1.95, 8.34758)
+use_collision = true
+size = Vector3(3, 1, 6)
+material = ExtResource("2_tttc6")

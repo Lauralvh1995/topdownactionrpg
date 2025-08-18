@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://drbdse8jvrws3"]
+
+[ext_resource type="Script" path="res://Player/PowerUps/PowerUpBase.gd" id="1_l75jm"]
+
+[resource]
+script = ExtResource("1_l75jm")
+name = "Dash"
