@@ -12,6 +12,8 @@ var jump_velocity : float
 @export var move_state : BaseState
 @export var dash_state : BaseState
 
+signal landed
+
 func initialize() -> void:
 	movement_speed = body.speed
 	jump_gravity = body.jump_gravity
@@ -21,6 +23,7 @@ func initialize() -> void:
 func enter() -> void:
 	super()
 	body.velocity.y = jump_velocity
+	animation_controller.enter_jump()
 
 func input(event : InputEvent) -> BaseState:
 	if event.is_action_pressed("dash") && body.can_dash():
@@ -39,6 +42,7 @@ func physics_process(delta: float) -> BaseState:
 		return fall_state
 	
 	if body.is_on_floor():
+		landed.emit()
 		if body.has_input():
 			return move_state
 		else:

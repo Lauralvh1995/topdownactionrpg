@@ -3,6 +3,7 @@ class_name StateMachine
 
 var current_state : BaseState
 @export var body : CharacterBody3D
+@export var animation_controller : AnimationController
 @export var default_state : BaseState
 
 func change_state(new_state : BaseState) -> void:
@@ -15,6 +16,7 @@ func change_state(new_state : BaseState) -> void:
 func initialize() -> void:
 	for child in get_children():
 		child.body = body
+		child.animation_controller = animation_controller
 		child.initialize()
 	
 	change_state(default_state)

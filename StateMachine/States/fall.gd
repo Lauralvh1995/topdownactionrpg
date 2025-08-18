@@ -12,6 +12,8 @@ var fall_gravity : float
 @export var idle_state : BaseState
 @export var dash_state : BaseState
 
+signal landed
+
 func initialize() -> void:
 	movement_speed = body.speed
 	coyote_time = body.COYOTE_TIME
@@ -41,3 +43,7 @@ func physics_process(delta: float) -> BaseState:
 			return idle_state
 	
 	return null
+
+func exit() -> void:
+	landed.emit()
+	animation_controller.land()

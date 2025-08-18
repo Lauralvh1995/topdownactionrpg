@@ -5,6 +5,7 @@ class_name BaseState
 @export_category("Exit States")
 
 var body : CharacterBody3D
+var animation_controller : AnimationController
 
 func initialize() -> void:
 	pass

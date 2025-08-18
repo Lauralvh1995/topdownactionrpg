@@ -5,6 +5,7 @@ class_name Player
 @export var fake_shadow_controller : Node3D
 @export var state_machine : Node
 @export var power_up_controller : PowerUpController
+@export var animation_controller : AnimationController
 
 @export_category("Movement Parameters")
 @export var ACCELERATION : float = 5.0

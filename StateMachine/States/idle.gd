@@ -9,11 +9,9 @@ class_name IdleState
 @export var fall_state : BaseState
 @export var dash_state : BaseState
 
-signal landed
-
 func enter() -> void :
 	super()
-	landed.emit()
+	animation_controller.enter_idle()
 
 func input(event: InputEvent) -> BaseState:
 	if body.has_input():

@@ -12,8 +12,6 @@ var fall_gravity : float
 @export var fall_state : BaseState
 @export var dash_state : BaseState
 
-signal landed
-
 func initialize() -> void:
 	movement_speed = body.speed
 	coyote_time = body.COYOTE_TIME
@@ -21,7 +19,7 @@ func initialize() -> void:
 
 func enter() -> void :
 	super()
-	landed.emit()
+	animation_controller.enter_move()
 
 func input(event: InputEvent) -> BaseState:
 	if event.is_action_pressed("jump"):
